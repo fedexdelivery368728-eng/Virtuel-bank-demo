@@ -1,0 +1,3023 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Administration — Banque Islamique de Développement</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f3f7f5;
+  color:#17332d;
+}
+
+header{
+  height:68px;
+  background:#073d34;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 5%;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:bold;
+}
+
+.brand img{
+  width:42px;
+  height:42px;
+  object-fit:contain;
+  border-radius:7px;
+  background:white;
+}
+
+button,
+input,
+select{
+  font:inherit;
+  padding:11px;
+  border-radius:9px;
+  border:1px solid #d5dfdb;
+}
+
+button{
+  cursor:pointer;
+}
+
+.primary{
+  background:#087f68;
+  color:white;
+  border:0;
+  font-weight:bold;
+}
+
+.danger{
+  background:#fff;
+  color:#a33f3f;
+  border:1px solid #dfbcbc;
+}
+
+.wrap{
+  max-width:1200px;
+  margin:28px auto;
+  padding:0 18px;
+}
+
+.auth{
+  max-width:430px;
+  margin:65px auto;
+  background:white;
+  padding:30px;
+  border-radius:17px;
+  box-shadow:0 8px 30px #0001;
+}
+
+.auth img{
+  width:120px;
+  display:block;
+  margin:0 auto 18px;
+}
+
+.auth input{
+  width:100%;
+  margin:7px 0 15px;
+}
+
+.muted{
+  color:#6b7c76;
+}
+
+.error{
+  color:#a33f3f;
+  min-height:20px;
+}
+
+.app{
+  display:none;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 22px #0000000b;
+  margin:15px 0;
+}
+
+.big{
+  font-size:27px;
+  font-weight:800;
+  margin-top:7px;
+}
+
+.search{
+  display:flex;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.search input{
+  flex:1;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+td,
+th{
+  text-align:left;
+  padding:11px;
+  border-bottom:1px solid #e7ecea;
+  font-size:14px;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.ok{
+  background:#e5f4ee;
+  color:#087f68;
+}
+
+.off{
+  background:#f8e8e8;
+  color:#a33f3f;
+}
+
+.actions{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#0008;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:10;
+}
+
+.modalBox{
+  background:white;
+  width:min(650px,100%);
+  max-height:90vh;
+  overflow:auto;
+  border-radius:16px;
+  padding:22px;
+}
+
+.close{
+  float:right;
+  border:0;
+  background:#eee;
+}
+
+.formgrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.formgrid input,
+.formgrid select{
+  width:100%;
+  margin-top:5px;
+}
+
+.small{
+  font-size:12px;
+}
+
+@media(max-width:800px){
+
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .formgrid{
+    grid-template-columns:1fr;
+  }
+
+  table{
+    display:block;
+    overflow:auto;
+    white-space:nowrap;
+  }
+}
+
+@media(max-width:520px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .top{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  header{
+    padding:0 15px;
+  }
+
+  .brand span{
+    font-size:13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="brand">
+
+    <img src="/IMG_4145.jpeg" alt="Logo">
+
+    <span>
+      Administration — Banque Islamique de Développement
+    </span>
+
+  </div>
+
+  <button
+    id="logoutBtn"
+    onclick="adminLogout()"
+    style="display:none"
+  >
+    Déconnexion
+  </button>
+
+</header>
+
+
+<div class="wrap">
+
+
+<!-- ========================= -->
+<!-- CONNEXION ADMINISTRATEUR -->
+<!-- ========================= -->
+
+<section id="login" class="auth">
+
+  <img src="/IMG_4145.jpeg" alt="Logo">
+
+  <h2 style="text-align:center;margin-top:0">
+    Espace administrateur
+  </h2>
+
+  <p
+    class="muted"
+    style="text-align:center"
+  >
+    Gestion de la banque
+  </p>
+
+
+  <label>
+    Email administrateur
+  </label>
+
+  <input
+    id="adminEmail"
+    type="email"
+    autocomplete="username"
+    placeholder="admin@Banque Islamique de Développement"
+  >
+
+
+  <label>
+    Mot de passe
+  </label>
+
+  <input
+    id="adminPassword"
+    type="password"
+    autocomplete="current-password"
+    placeholder="Mot de passe"
+  >
+
+
+  <button
+    class="primary"
+    style="width:100%"
+    onclick="adminLogin()"
+  >
+    Se connecter
+  </button>
+
+
+  <p
+    id="loginError"
+    class="error"
+  ></p>
+
+
+ <p
+  class="small muted"
+  style="text-align:center"
+>
+  Première connexion ?
+</p>
+
+<button
+  type="button"
+  style="width:100%;margin-top:5px"
+  onclick="openAdminSetup()"
+>
+  Créer le premier administrateur
+</button>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- APPLICATION ADMIN -->
+<!-- ========================= -->
+
+<section id="app" class="app">
+
+
+  <div class="top">
+
+    <div>
+
+      <h1 style="margin-bottom:5px">
+        Tableau de bord
+      </h1>
+
+      <p
+        id="adminInfo"
+        class="muted"
+      ></p>
+
+    </div>
+
+
+    <button
+      class="primary"
+      onclick="openCreate()"
+    >
+      + Créer un compte
+    </button>
+
+  </div>
+
+
+
+  <!-- STATISTIQUES -->
+
+  <div class="grid">
+
+    <div class="card">
+
+      <span class="muted">
+        Clients
+      </span>
+
+      <div
+        id="statUsers"
+        class="big"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <span class="muted">
+        Comptes actifs
+      </span>
+
+      <div
+        id="statActive"
+        class="big"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <span class="muted">
+        Solde total
+      </span>
+
+      <div
+        id="statBalance"
+        class="big"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <span class="muted">
+        Transactions
+      </span>
+
+      <div
+        id="statTx"
+        class="big"
+      >
+        —
+      </div>
+
+    </div>
+
+  </div>
+
+<!-- ========================= -->
+<!-- VIREMENTS ENTRANTS -->
+<!-- ========================= -->
+
+<section class="card">
+
+  <div class="top" style="margin-bottom:15px">
+
+    <div>
+      <h2 style="margin:0">
+        Virements entrants 
+      </h2>
+
+      <p class="muted" style="margin:6px 0 0">
+        Les virements créés ici sont fictifs.
+        Ils restent en attente et ne créditent le solde du client
+        qu'après validation.
+      </p>
+    </div>
+
+    <button
+      class="primary"
+      onclick="openIncomingCreate()"
+    >
+      + Nouveau virement
+    </button>
+
+  </div>
+
+
+  <div style="overflow:auto">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Compte</th>
+          <th>Client</th>
+          <th>Expéditeur</th>
+          <th>Montant</th>
+          <th>Référence</th>
+          <th>Condition </th>
+          <th>Statut</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody id="incomingTransfersTable">
+
+        <tr>
+          <td
+            colspan="9"
+            class="muted"
+            style="text-align:center"
+          >
+            Aucun virement entrant chargé.
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+  <!-- GESTION DES CLIENTS -->
+
+  <section class="card">
+
+    <h2>
+      Gestion des comptes
+    </h2>
+
+
+    <div class="search">
+
+      <input
+        id="search"
+        placeholder="Rechercher un client, email ou compte"
+        onkeydown="if(event.key==='Enter')loadUsers()"
+      >
+
+      <button
+        class="primary"
+        onclick="loadUsers()"
+      >
+        Rechercher
+      </button>
+
+    </div>
+
+
+    <div style="overflow:auto">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Compte
+            </th>
+
+            <th>
+              Client
+            </th>
+
+            <th>
+              Email
+            </th>
+
+            <th>
+              Solde
+            </th>
+
+            <th>
+              Statut
+            </th>
+
+            <th>
+              Créé le
+            </th>
+
+            <th>
+              Actions
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="usersTable">
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+
+</section>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- FENÊTRE MODALE -->
+<!-- ========================= -->
+
+<div
+  id="modal"
+  class="modal"
+>
+
+  <div class="modalBox">
+
+    <button
+      class="close"
+      onclick="closeModal()"
+    >
+      ✕
+    </button>
+
+
+    <h2 id="modalTitle">
+      Créer un compte
+    </h2>
+
+
+    <div id="modalBody">
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<script>
+
+const $ = id => document.getElementById(id);
+
+
+
+function usd(cents){
+
+  return new Intl.NumberFormat(
+    'fr-FR',
+    {
+      style:'currency',
+      currency:'USD'
+    }
+  ).format(
+    Number(cents)/100
+  );
+
+}
+
+
+
+async function api(url,opt={}){
+
+  const response = await fetch(
+    url,
+    {
+      headers:{
+        'Content-Type':'application/json'
+      },
+      ...opt
+    }
+  );
+
+
+  const data =
+    await response
+      .json()
+      .catch(()=>({}));
+
+
+  if(!response.ok){
+
+    throw data;
+
+  }
+
+
+  return data;
+
+}
+
+
+
+function esc(value){
+
+  return String(value ?? '')
+    .replace(/[&<>"']/g,m=>({
+
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#039;'
+
+    }[m]));
+
+}
+
+
+
+/* ========================= */
+/* CONNEXION */
+/* ========================= */
+
+function openAdminSetup(){
+
+  openModal(
+    'Créer le premier administrateur',
+    `
+      <label>Nom</label>
+      <input
+        id="setupName"
+        type="text"
+        placeholder="Votre nom"
+      >
+
+      <label>Email</label>
+      <input
+        id="setupEmail"
+        type="email"
+        placeholder="admin@Banque Islamique de Développement"
+      >
+
+      <label>Mot de passe</label>
+      <input
+        id="setupPassword"
+        type="password"
+        placeholder="Minimum 8 caractères"
+      >
+
+      <label>Confirmer le mot de passe</label>
+      <input
+        id="setupPasswordConfirm"
+        type="password"
+        placeholder="Confirmer le mot de passe"
+      >
+
+      <p id="setupError" class="error"></p>
+
+      <button
+        class="primary"
+        style="width:100%"
+        onclick="createFirstAdmin()"
+      >
+        Créer l’administrateur
+      </button>
+    `
+  );
+
+}
+
+
+async function createFirstAdmin(){
+
+  const name =
+    document.getElementById('setupName').value.trim();
+
+  const email =
+    document.getElementById('setupEmail').value.trim();
+
+  const password =
+    document.getElementById('setupPassword').value;
+
+  const confirm =
+    document.getElementById('setupPasswordConfirm').value;
+
+  const error =
+    document.getElementById('setupError');
+
+  error.textContent = '';
+
+  if(!name || !email || !password){
+    error.textContent =
+      'Veuillez remplir tous les champs.';
+    return;
+  }
+
+  if(password.length < 8){
+    error.textContent =
+      'Le mot de passe doit contenir au moins 8 caractères.';
+    return;
+  }
+
+  if(password !== confirm){
+    error.textContent =
+      'Les mots de passe ne correspondent pas.';
+    return;
+  }
+
+  try{
+
+    const result =
+      await api(
+        '/api/admin/setup',
+        {
+          method:'POST',
+          body:JSON.stringify({
+            name:name,
+            email:email,
+            password:password
+          })
+        }
+      );
+
+    if(!result.ok){
+      throw new Error(
+        result.error || 'Création impossible'
+      );
+    }
+
+    closeModal();
+
+    $('adminEmail').value = email;
+    $('adminPassword').value = password;
+
+    await adminLogin();
+
+  }catch(e){
+
+    error.textContent =
+      e.message ||
+      'Erreur lors de la création.';
+
+  }
+
+}
+  
+async function adminLogin(){
+
+  $('loginError').textContent='';
+
+
+  try{
+
+    await api(
+      '/api/admin/login',
+      {
+        method:'POST',
+
+        body:JSON.stringify({
+
+          email:$('adminEmail').value,
+
+          password:$('adminPassword').value
+
+        })
+      }
+    );
+
+
+    await start();
+
+  }
+
+  catch(error){
+
+    $('loginError').textContent =
+      'Identifiants administrateur incorrects.';
+
+  }
+
+}
+
+
+
+/* ========================= */
+/* DÉMARRAGE */
+/* ========================= */
+// =====================================================
+// VIREMENTS ENTRANTS — 
+// =====================================================
+
+async function loadIncomingTransfers(){
+
+  const rows = await api('/api/admin/incoming-transfers');
+
+  const tbody = $('incomingTransfersTable');
+
+  if(!rows || !rows.length){
+
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="9" class="muted" style="text-align:center">
+          Aucun virement entrant.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  tbody.innerHTML = rows.map(row => {
+
+    const amount =
+      (Number(row.amount_cents || 0) / 100)
+      .toLocaleString('fr-FR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }) + ' USD';
+
+    let statusHtml = '';
+
+    if(row.status === 'pending'){
+      statusHtml = `
+        <span
+          class="badge"
+          style="background:#fff3d6;color:#8a6500"
+        >
+          En attente
+        </span>
+      `;
+    }
+
+    else if(row.status === 'available'){
+      statusHtml = `
+        <span class="badge ok">
+          Disponible
+        </span>
+      `;
+    }
+
+    else if(row.status === 'cancelled'){
+      statusHtml = `
+        <span class="badge off">
+          Annulé
+        </span>
+      `;
+    }
+
+    else{
+      statusHtml = `
+        <span class="badge">
+          ${esc(row.status || '—')}
+        </span>
+      `;
+    }
+
+    const date = row.created_at
+      ? new Date(row.created_at).toLocaleString('fr-FR')
+      : '—';
+
+    let actions = '—';
+
+    if(row.status === 'pending'){
+
+      actions = `
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+
+          <button
+            class="primary"
+            onclick="validateIncoming(${row.id})"
+          >
+            Valider
+          </button>
+
+          <button
+            class="danger"
+            onclick="cancelIncoming(${row.id})"
+          >
+            Annuler
+          </button>
+
+        </div>
+      `;
+    }
+
+    return `
+      <tr>
+
+       <td>
+  <b>${esc(row.account_no || '—')}</b>
+</td>
+
+        <td>
+          ${esc(row.user_name || '—')}
+        </td>
+
+        <td>
+          ${esc(row.sender_name || '—')}
+        </td>
+
+        <td>
+          <strong>${amount}</strong>
+        </td>
+
+        <td>
+          ${esc(row.reference || '—')}
+        </td>
+
+        <td>
+          ${esc(row.condition_text || 'Aucune')}
+        </td>
+
+        <td>
+          ${statusHtml}
+        </td>
+
+        <td>
+          ${date}
+        </td>
+
+        <td>
+          ${actions}
+        </td>
+
+      </tr>
+    `;
+
+  }).join('');
+}
+
+
+// -----------------------------------------------------
+// OUVRIR LE FORMULAIRE DE CRÉATION
+// -----------------------------------------------------
+
+function openIncomingCreate(){
+
+  const html = `
+
+    <div
+      class="modal"
+      id="incomingCreateModal"
+      style="display:flex"
+    >
+
+      <div class="modalBox">
+
+        <button
+          class="close"
+          onclick="closeIncomingCreate()"
+        >
+          ✕
+        </button>
+
+        <h2>
+          Nouveau virement entrant —
+        </h2>
+
+        <div class="formgrid">
+
+          <div>
+
+            <label>
+              Compte client
+            </label>
+
+            <select id="incomingUserId">
+              <option value="">
+                Sélectionner un client
+              </option>
+            </select>
+
+          </div>
+
+          <div>
+
+            <label>
+              Nom de l'expéditeur
+            </label>
+
+            <input
+              id="incomingSender"
+              placeholder="Ex. Société "
+            >
+
+          </div>
+
+          <div>
+
+            <label>
+              Montant (USD)
+            </label>
+
+            <input
+              id="incomingAmount"
+              type="number"
+              min="1"
+              step="1"
+              placeholder="Ex. 500000"
+            >
+
+          </div>
+
+          <div>
+
+            <label>
+              Référence
+            </label>
+
+            <input
+              id="incomingReference"
+              placeholder="Ex. VIR-001"
+            >
+
+          </div>
+
+          <div style="grid-column:1/-1">
+
+            <label>
+              Condition 
+            </label>
+
+            <input
+              id="incomingCondition"
+              placeholder="Ex. Validation interne requise"
+            >
+
+          </div>
+
+        </div>
+
+        <p class="small muted">
+          Ceci est un virement fictif de démonstration.
+          Il reste en attente jusqu'à sa validation
+          depuis l'administration.
+        </p>
+
+        <button
+          class="primary"
+          onclick="createIncomingTransfer()"
+        >
+          Créer le virement 
+        </button>
+
+        <button
+          onclick="closeIncomingCreate()"
+          style="margin-left:8px"
+        >
+          Annuler
+        </button>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.insertAdjacentHTML(
+    'beforeend',
+    html
+  );
+
+  loadIncomingUsers();
+
+}
+
+// -----------------------------------------------------
+// FERMER LE FORMULAIRE
+// -----------------------------------------------------
+
+function closeIncomingCreate(){
+
+  const modal = $('incomingCreateModal');
+
+  if(modal){
+    modal.remove();
+  }
+
+}
+
+
+// -----------------------------------------------------
+// CHARGER LES CLIENTS DANS LE SELECT
+// -----------------------------------------------------
+
+async function loadIncomingUsers(){
+
+  const users = await api('/api/admin/users');
+
+  const select = $('incomingUserId');
+
+  if(!select) return;
+
+  select.innerHTML = `
+    <option value="">
+      Sélectionner un client
+    </option>
+  `;
+
+  users
+    .filter(user => user.active !== 0)
+    .forEach(user => {
+
+      const option = document.createElement('option');
+
+      option.value = user.id;
+
+      option.textContent =
+        `#${user.id} — ${user.email}`;
+
+      select.appendChild(option);
+
+    });
+
+}
+
+
+// -----------------------------------------------------
+// CRÉER LE VIREMENT
+// -----------------------------------------------------
+
+async function createIncomingTransfer(){
+
+  const userId = $('incomingUserId').value;
+  const senderName = $('incomingSender').value.trim();
+  const amount = $('incomingAmount').value;
+  const reference = $('incomingReference').value.trim();
+  const conditionText = $('incomingCondition').value.trim();
+
+  if(!userId){
+    alert('Sélectionne un compte client.');
+    return;
+  }
+
+  if(!senderName){
+    alert("Indique le nom de l'expéditeur.");
+    return;
+  }
+
+  if(!amount || Number(amount) <= 0){
+    alert('Indique un montant valide.');
+    return;
+  }
+
+  try{
+
+    await api('/api/admin/incoming-transfers', {
+
+      method: 'POST',
+
+      body:JSON.stringify({
+  userId: Number(userId),
+  senderName: senderName,
+  amount: amount,
+  reference: reference,
+  conditionType: 'manual',
+  conditionText: conditionText || 'Validation requise'
+})
+
+    });
+
+    closeIncomingCreate();
+
+    await loadIncomingTransfers();
+
+    alert('Virement entrant créé.');
+
+  }catch(err){
+
+    alert(
+      err.message ||
+      'Impossible de créer le virement.'
+    );
+
+  }
+
+}
+
+
+// -----------------------------------------------------
+// VALIDER
+// -----------------------------------------------------
+
+async function validateIncoming(id){
+
+  if(!confirm(
+    'Valider ce virement entrant ?\\n\\n' +
+    'Le montant sera alors crédité sur le compte du client.'
+  )){
+    return;
+  }
+
+  try{
+
+    await api(
+      `/api/admin/incoming-transfers/${id}/validate`,
+      {
+        method:'POST'
+      }
+    );
+
+    await loadIncomingTransfers();
+
+    await loadUsers();
+
+    await loadStats();
+
+    alert('Virement validé et crédité.');
+
+  }catch(err){
+
+    alert(
+      err.message ||
+      'Impossible de valider le virement.'
+    );
+
+  }
+
+}
+
+
+// -----------------------------------------------------
+// ANNULER
+// -----------------------------------------------------
+
+async function cancelIncoming(id){
+
+  if(!confirm(
+    'Annuler ce virement entrant  ?'
+  )){
+    return;
+  }
+
+  try{
+
+    await api(
+      `/api/admin/incoming-transfers/${id}/cancel`,
+      {
+        method:'POST'
+      }
+    );
+
+    await loadIncomingTransfers();
+
+    alert('Virement annulé.');
+
+  }catch(err){
+
+    alert(
+      err.message ||
+      'Impossible d’annuler le virement.'
+    );
+
+  }
+
+}
+async function start(){
+  const me = await api('/api/admin/me');
+
+  $('login').style.display='none';
+  $('app').style.display='block';
+  $('logoutBtn').style.display='block';
+
+  $('adminInfo').textContent =
+    'Connecté en tant que ' + me.email;
+
+  await loadUsers();
+  await loadStats();
+  await loadIncomingTransfers();
+}
+
+
+
+
+/* ========================= */
+/* VÉRIFICATION SESSION */
+/* ========================= */
+
+async function check(){
+
+  try{
+
+    await api('/api/admin/me');
+
+    await start();
+
+  }
+
+  catch(error){
+
+    // Pas encore connecté
+
+  }
+
+}
+
+
+
+/* ========================= */
+/* DÉCONNEXION */
+/* ========================= */
+
+async function adminLogout(){
+
+  await api(
+    '/api/admin/logout',
+    {
+      method:'POST'
+    }
+  );
+
+
+  location.reload();
+
+}
+
+
+
+/* ========================= */
+/* STATISTIQUES */
+/* ========================= */
+
+async function loadStats(){
+  try{
+    const users=await api('/api/admin/users');
+
+    const active=users.filter(
+      u=>u.active
+    ).length;
+
+    const balance=users.reduce(
+      (total,u)=>total+Number(u.balance_cents),
+      0
+    );
+
+    let totalTransactions=0;
+
+    for(const user of users){
+      try{
+        const transactions=
+          await api(
+            '/api/admin/users/'+user.id+'/transactions'
+          );
+
+        if(Array.isArray(transactions)){
+          totalTransactions+=transactions.length;
+        }
+      }catch(error){
+        console.error(
+          'Erreur transactions compte '+user.id,
+          error
+        );
+      }
+    }
+
+    $('statUsers').textContent=users.length;
+
+    $('statActive').textContent=active;
+
+    $('statBalance').textContent=usd(balance);
+
+    $('statTx').textContent=totalTransactions;
+
+  }catch(error){
+    console.error(error);
+
+    $('statTx').textContent='—';
+  }
+}
+
+
+
+/* ========================= */
+/* LISTE DES CLIENTS */
+/* ========================= */
+
+async function loadUsers(){
+
+  const users =
+    await api('/api/admin/users');
+
+
+  const query =
+    ($('search').value || '')
+      .trim()
+      .toLowerCase();
+
+
+  const filtered =
+    users.filter(u=>{
+
+      if(!query){
+        return true;
+      }
+
+
+      return (
+
+        String(u.name)
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        String(u.email)
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        String(u.account_no)
+          .toLowerCase()
+          .includes(query)
+
+      );
+
+    });
+
+
+
+  $('usersTable').innerHTML =
+
+    filtered.map(u=>`
+
+      <tr>
+
+        <td>
+          <b>${esc(u.account_no)}</b>
+        </td>
+
+
+        <td>
+          ${esc(u.name)}
+        </td>
+
+
+        <td>
+          ${esc(u.email)}
+        </td>
+
+
+        <td>
+          <b>
+            ${usd(u.balance_cents)}
+          </b>
+        </td>
+
+
+        <td>
+
+          <span
+            class="badge ${u.active?'ok':'off'}"
+          >
+
+            ${u.active?'Actif':'Désactivé'}
+
+          </span>
+
+        </td>
+
+
+        <td>
+
+          ${new Date(
+            u.created_at
+          ).toLocaleDateString('fr-FR')}
+
+        </td>
+
+
+        <td>
+
+          <div class="actions">
+
+
+            <button
+              onclick="editUser(${u.id})"
+            >
+              Modifier
+            </button>
+
+
+            <button
+              onclick="balanceUser(${u.id})"
+            >
+              Solde
+            </button>
+
+
+            <button
+              onclick="transactions(${u.id})"
+            >
+              Opérations
+            </button>
+
+
+            <button
+              class="${u.active?'danger':'primary'}"
+              onclick="toggleUser(${u.id},${u.active?0:1})"
+            >
+
+              ${u.active
+                ? 'Désactiver'
+                : 'Activer'}
+
+            </button>
+
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `).join('')
+
+    ||
+
+    `<tr>
+      <td colspan="7">
+        Aucun client trouvé.
+      </td>
+    </tr>`;
+
+}
+
+
+
+/* ========================= */
+/* MODALES */
+/* ========================= */
+
+function openModal(title,body){
+
+  $('modalTitle').textContent =
+    title;
+
+  $('modalBody').innerHTML =
+    body;
+
+  $('modal').style.display =
+    'flex';
+
+}
+
+
+
+function closeModal(){
+
+  $('modal').style.display =
+    'none';
+
+}
+
+
+
+/* ========================= */
+/* CRÉER UN COMPTE */
+/* ========================= */
+
+  function openCreate(){
+
+ openModal('Ouverture d’un compte',`
+
+  <h3>Informations personnelles</h3>
+
+  <div class="formgrid">
+
+   <div>
+    <label>Prénom(s)</label>
+    <input id="cFirstName" type="text" placeholder="Prénom(s)">
+   </div>
+
+   <div>
+    <label>Nom</label>
+    <input id="cLastName" type="text" placeholder="Nom">
+   </div>
+
+   <div>
+    <label>Date de naissance</label>
+    <input id="cBirthDate" type="date">
+   </div>
+
+   <div>
+    <label>Lieu de naissance</label>
+    <input id="cBirthPlace" type="text" placeholder="Ville">
+   </div>
+
+   <div>
+    <label>Nationalité</label>
+    <input id="cNationality" type="text" placeholder="Nationalité">
+   </div>
+
+   <div>
+    <label>Sexe</label>
+    <select id="cGender">
+     <option value="">Sélectionner</option>
+     <option value="M">Masculin</option>
+     <option value="F">Féminin</option>
+     <option value="OTHER">Autre</option>
+    </select>
+   </div>
+
+   <div>
+    <label>Situation matrimoniale</label>
+    <select id="cMaritalStatus">
+     <option value="">Sélectionner</option>
+     <option value="single">Célibataire</option>
+     <option value="married">Marié(e)</option>
+     <option value="divorced">Divorcé(e)</option>
+     <option value="widowed">Veuf / Veuve</option>
+    </select>
+   </div>
+
+  </div>
+
+
+  <h3>Coordonnées</h3>
+
+  <div class="formgrid">
+
+   <div>
+    <label>Téléphone</label>
+    <input id="cPhone" type="tel" placeholder=" liste des pays...">
+   </div>
+
+   <div>
+    <label>Email</label>
+    <input id="cEmail" type="email" placeholder="client@email.com">
+   </div>
+
+   <div>
+    <label>Adresse</label>
+    <input id="cAddress" type="text" placeholder="Adresse">
+   </div>
+
+   <div>
+    <label>Ville</label>
+    <input id="cCity" type="text" placeholder="Ville">
+   </div>
+
+   <div>
+    <label>Pays</label>
+    <input id="cCountry" type="text" placeholder="Pays">
+   </div>
+
+  </div>
+
+
+  <h3>Pièce d'identité</h3>
+
+  <p class="small muted">
+   Utiliser uniquement des informations fictives pour cette démonstration.
+  </p>
+
+  <div class="formgrid">
+
+   <div>
+    <label>Type de pièce</label>
+    <select id="cIdType">
+     <option value="">Sélectionner</option>
+     <option value="CNI">Carte nationale d'identité</option>
+     <option value="PASSPORT">Passeport</option>
+     <option value="OTHER">Autre</option>
+    </select>
+   </div>
+
+   <div>
+    <label>Numéro de pièce</label>
+    <input id="cIdNumber" type="text" placeholder="Numéro fictif">
+   </div>
+
+   <div>
+    <label>Date de délivrance</label>
+    <input id="cIdIssueDate" type="date">
+   </div>
+
+   <div>
+    <label>Date d'expiration</label>
+    <input id="cIdExpiryDate" type="date">
+   </div>
+
+   <div>
+    <label>Pays de délivrance</label>
+    <input id="cIdCountry" type="text" placeholder="Pays">
+   </div>
+
+  </div>
+
+
+  <h3>Informations professionnelles</h3>
+
+  <div class="formgrid">
+
+   <div>
+    <label>Profession</label>
+    <input id="cProfession" type="text" placeholder="Profession">
+   </div>
+
+   <div>
+    <label>Employeur / entreprise</label>
+    <input id="cEmployer" type="text" placeholder="Employeur ou entreprise">
+   </div>
+
+   <div>
+    <label>Secteur d'activité</label>
+    <input id="cBusinessSector" type="text" placeholder="Secteur d'activité">
+   </div>
+
+   <div>
+    <label>Revenus mensuels (USD)</label>
+    <input id="cMonthlyIncome" type="number" min="0" step="0.01" value="0">
+   </div>
+
+   <div>
+    <label>Source principale des revenus</label>
+    <input id="cIncomeSource" type="text" placeholder="Salaire, activité, entreprise...">
+   </div>
+
+  </div>
+
+
+  <h3>Compte bancaire</h3>
+
+  <div class="formgrid">
+
+   <div>
+    <label>Type de compte</label>
+    <select id="cAccountType">
+     <option value="current">Compte courant</option>
+     <option value="savings">Compte épargne</option>
+     <option value="business">Compte professionnel</option>
+    </select>
+        <div>
+      <label>Pays bancaire</label>
+
+      <select id="cBankCountry">
+        <option value="MA">🇲🇦 Maroc</option>
+        <option value="AE">🇦🇪 Émirats arabes unis — Dubaï</option>
+      </select>
+    </div>
+   </div>
+
+   <div>
+  <select id="cCurrency">
+  <option value="USD">USD — Dollar américain</option>
+  <option value="EUR">EUR — Euro</option>
+  <option value="MAD">MAD — Dirham marocain</option>
+  <option value="AED">AED — Dirham des Émirats arabes unis</option>
+</select>
+   </div>
+
+   <div>
+    <label>Solde initial (USD)</label>
+    <input id="cBalance" type="number" min="0" step="0.01" value="0">
+   </div>
+
+  </div>
+
+
+  <h3>Accès au compte</h3>
+
+  <div class="formgrid">
+
+   <div>
+    <label>Mot de passe</label>
+    <input id="cPass" type="password" placeholder="8 caractères minimum">
+   </div>
+
+   <div>
+    <label>Confirmation du mot de passe</label>
+    <input id="cPassConfirm" type="password" placeholder="Confirmer le mot de passe">
+   </div>
+
+  </div>
+
+
+  <p id="modalError" class="error"></p>
+
+  <button
+   class="primary"
+   style="width:100%;margin-top:15px"
+   onclick="createUser()"
+  >
+   Créer le compte
+  </button>
+
+ `);
+
+}
+
+
+async function createUser(){
+
+  const password =
+    $('cPass').value;
+
+  const confirmPassword =
+    $('cPassConfirm').value;
+
+  const error =
+    $('modalError');
+
+  error.textContent = '';
+
+
+  if(password.length < 8){
+
+    error.textContent =
+      'Le mot de passe doit contenir au moins 8 caractères.';
+
+    return;
+
+  }
+
+
+  if(password !== confirmPassword){
+
+    error.textContent =
+      'Les mots de passe ne correspondent pas.';
+
+    return;
+
+  }
+
+
+  const firstName =
+    $('cFirstName').value.trim();
+
+  const lastName =
+    $('cLastName').value.trim();
+
+
+  if(!firstName || !lastName){
+
+    error.textContent =
+      'Le prénom et le nom sont obligatoires.';
+
+    return;
+
+  }
+
+
+  if(!$('cEmail').value.trim()){
+
+    error.textContent =
+      'L’adresse email est obligatoire.';
+
+    return;
+
+  }
+
+
+  try{
+
+    const result =
+      await api(
+        '/api/admin/users',
+        {
+          method:'POST',
+
+          body:JSON.stringify({
+
+            firstName:firstName,
+
+            lastName:lastName,
+
+            birthDate:$('cBirthDate').value,
+
+            birthPlace:$('cBirthPlace').value.trim(),
+
+            nationality:$('cNationality').value.trim(),
+
+            gender:$('cGender').value,
+
+            maritalStatus:$('cMaritalStatus').value,
+
+
+            phone:$('cPhone').value.trim(),
+
+            email:$('cEmail').value.trim(),
+
+            address:$('cAddress').value.trim(),
+
+            city:$('cCity').value.trim(),
+
+            country:$('cCountry').value.trim(),
+
+
+            idType:$('cIdType').value,
+
+            idNumber:$('cIdNumber').value.trim(),
+
+            idIssueDate:$('cIdIssueDate').value,
+
+            idExpiryDate:$('cIdExpiryDate').value,
+
+            idCountry:$('cIdCountry').value.trim(),
+
+
+            profession:$('cProfession').value.trim(),
+
+            employer:$('cEmployer').value.trim(),
+
+            businessSector:$('cBusinessSector').value.trim(),
+
+            monthlyIncome:$('cMonthlyIncome').value,
+
+            incomeSource:$('cIncomeSource').value.trim(),
+
+accountType:$('cAccountType').value,
+
+accountCurrency:$('cCurrency').value,
+bankCountry:$('cBankCountry').value,
+password:password,
+            
+
+            balance:$('cBalance').value
+
+          })
+        }
+      );
+
+
+    closeModal();
+
+    await loadUsers();
+
+    await loadStats();
+
+
+    alert(
+      'Compte créé avec succès.\n\n' +
+      'Numéro de compte : ' +
+      result.account_no
+    );
+
+
+  }catch(error){
+
+    $('modalError').textContent =
+
+      error.error === 'EMAIL_EXISTS'
+
+      ?
+
+      'Cet email existe déjà.'
+
+      :
+
+      (
+        error.error ||
+        'Impossible de créer le compte.'
+      );
+
+  }
+
+}
+
+
+
+
+/* ========================= */
+/* MODIFIER UN COMPTE */
+/* ========================= */
+
+async function editUser(id){
+
+  const users =
+    await api('/api/admin/users');
+
+  const user =
+    users.find(u => u.id === id);
+
+  if(!user){
+    return;
+  }
+
+  openModal(
+
+    'Modifier le compte '+user.account_no,
+
+    `
+
+    <div
+      style="
+        background:#f3f7f5;
+        padding:12px;
+        border-radius:10px;
+        margin-bottom:18px;
+      "
+    >
+
+      <b>Compte :</b>
+      ${esc(user.account_no || '—')}
+
+      <br>
+
+      <span class="small muted">
+        Les informations bancaires générées à l'ouverture
+        du compte ne sont pas modifiables ici.
+      </span>
+
+    </div>
+
+
+    <h3>Informations personnelles</h3>
+
+    <div class="formgrid">
+
+      <div>
+        <label>Prénom(s)</label>
+        <input
+          id="eFirstName"
+          value="${esc(user.first_name || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Nom</label>
+        <input
+          id="eLastName"
+          value="${esc(user.last_name || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Date de naissance</label>
+        <input
+          id="eBirthDate"
+          type="date"
+          value="${esc(user.birth_date || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Lieu de naissance</label>
+        <input
+          id="eBirthPlace"
+          value="${esc(user.birth_place || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Nationalité</label>
+        <input
+          id="eNationality"
+          value="${esc(user.nationality || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Sexe</label>
+        <select id="eGender">
+
+          <option value="">
+            Sélectionner
+          </option>
+
+          <option
+            value="M"
+            ${user.gender === 'M' ? 'selected' : ''}
+          >
+            Masculin
+          </option>
+
+          <option
+            value="F"
+            ${user.gender === 'F' ? 'selected' : ''}
+          >
+            Féminin
+          </option>
+
+          <option
+            value="OTHER"
+            ${user.gender === 'OTHER' ? 'selected' : ''}
+          >
+            Autre
+          </option>
+
+        </select>
+      </div>
+
+      <div>
+        <label>Situation matrimoniale</label>
+
+        <select id="eMaritalStatus">
+
+          <option value="">
+            Sélectionner
+          </option>
+
+          <option
+            value="single"
+            ${user.marital_status === 'single' ? 'selected' : ''}
+          >
+            Célibataire
+          </option>
+
+          <option
+            value="married"
+            ${user.marital_status === 'married' ? 'selected' : ''}
+          >
+            Marié(e)
+          </option>
+
+          <option
+            value="divorced"
+            ${user.marital_status === 'divorced' ? 'selected' : ''}
+          >
+            Divorcé(e)
+          </option>
+
+          <option
+            value="widowed"
+            ${user.marital_status === 'widowed' ? 'selected' : ''}
+          >
+            Veuf / Veuve
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <h3>Coordonnées</h3>
+
+    <div class="formgrid">
+
+      <div>
+        <label>Téléphone</label>
+
+        <input
+          id="ePhone"
+          type="tel"
+          value="${esc(user.phone || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Email</label>
+
+        <input
+          id="eEmail"
+          type="email"
+          value="${esc(user.email || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Adresse</label>
+
+        <input
+          id="eAddress"
+          value="${esc(user.address || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Ville</label>
+
+        <input
+          id="eCity"
+          value="${esc(user.city || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Pays</label>
+
+        <input
+          id="eCountry"
+          value="${esc(user.country || '')}"
+        >
+      </div>
+
+    </div>
+
+
+    <h3>Pièce d'identité</h3>
+
+    <p class="small muted">
+      Utiliser uniquement des informations fictives
+      pour cette démonstration.
+    </p>
+
+    <div class="formgrid">
+
+      <div>
+        <label>Type de pièce</label>
+
+        <select id="eIdType">
+
+          <option value="">
+            Sélectionner
+          </option>
+
+          <option
+            value="CNI"
+            ${user.id_type === 'CNI' ? 'selected' : ''}
+          >
+            Carte nationale d'identité
+          </option>
+
+          <option
+            value="PASSPORT"
+            ${user.id_type === 'PASSPORT' ? 'selected' : ''}
+          >
+            Passeport
+          </option>
+
+          <option
+            value="OTHER"
+            ${user.id_type === 'OTHER' ? 'selected' : ''}
+          >
+            Autre
+          </option>
+
+        </select>
+      </div>
+
+      <div>
+        <label>Numéro de pièce</label>
+
+        <input
+          id="eIdNumber"
+          value="${esc(user.id_number || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Date de délivrance</label>
+
+        <input
+          id="eIdIssueDate"
+          type="date"
+          value="${esc(user.id_issue_date || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Date d'expiration</label>
+
+        <input
+          id="eIdExpiryDate"
+          type="date"
+          value="${esc(user.id_expiry_date || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Pays de délivrance</label>
+
+        <input
+          id="eIdCountry"
+          value="${esc(user.id_country || '')}"
+        >
+      </div>
+
+    </div>
+
+
+    <h3>Informations professionnelles</h3>
+
+    <div class="formgrid">
+
+      <div>
+        <label>Profession</label>
+
+        <input
+          id="eProfession"
+          value="${esc(user.profession || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Employeur / entreprise</label>
+
+        <input
+          id="eEmployer"
+          value="${esc(user.employer || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Secteur d'activité</label>
+
+        <input
+          id="eBusinessSector"
+          value="${esc(user.business_sector || '')}"
+        >
+      </div>
+
+      <div>
+        <label>Revenus mensuels (USD)</label>
+
+        <input
+          id="eMonthlyIncome"
+          type="number"
+          min="0"
+          step="0.01"
+          value="${esc(user.monthly_income || 0)}"
+        >
+      </div>
+
+      <div>
+        <label>Source principale des revenus</label>
+
+        <input
+          id="eIncomeSource"
+          value="${esc(user.income_source || '')}"
+        >
+      </div>
+
+    </div>
+
+
+    <h3>Compte bancaire</h3>
+
+    <div class="formgrid">
+
+      <div>
+        <label>Type de compte</label>
+
+        <select id="eAccountType">
+
+          <option
+            value="current"
+            ${user.account_type === 'current' ? 'selected' : ''}
+          >
+            Compte courant
+          </option>
+
+          <option
+            value="savings"
+            ${user.account_type === 'savings' ? 'selected' : ''}
+          >
+            Compte épargne
+          </option>
+
+          <option
+            value="business"
+            ${user.account_type === 'business' ? 'selected' : ''}
+          >
+            Compte professionnel
+          </option>
+
+        </select>
+      </div>
+
+      <div>
+        <label>Devise</label>
+
+        <select id="eCurrency">
+
+          <option
+            value="USD"
+            ${user.account_currency === 'USD' ? 'selected' : ''}
+          >
+            USD — Dollar américain
+          </option>
+
+          <option
+            value="EUR"
+            ${user.account_currency === 'EUR' ? 'selected' : ''}
+          >
+            EUR — Euro
+          </option>
+
+          <option
+            value="MAD"
+            ${user.account_currency === 'MAD' ? 'selected' : ''}
+          >
+            MAD — Dirham marocain
+          </option>
+
+          <option
+            value="AED"
+            ${user.account_currency === 'AED' ? 'selected' : ''}
+          >
+            AED — Dirham des Émirats arabes unis
+          </option>
+
+        </select>
+      </div>
+
+    </div>
+
+
+    <h3>Informations bancaires</h3>
+
+    <div class="formgrid">
+
+      <div>
+        <label>RIB</label>
+
+        <input
+          value="${esc(user.rib || '')}"
+          readonly
+        >
+      </div>
+
+      <div>
+        <label>IBAN</label>
+
+        <input
+          value="${esc(user.iban || '')}"
+          readonly
+        >
+      </div>
+
+      <div>
+        <label>BIC</label>
+
+        <input
+          value="${esc(user.bic || '')}"
+          readonly
+        >
+      </div>
+
+    </div>
+
+
+    <h3>Accès au compte</h3>
+
+    <div class="formgrid">
+
+      <div>
+        <label>Nouveau mot de passe</label>
+
+        <input
+          id="ePass"
+          type="password"
+          placeholder="Laisser vide pour conserver"
+        >
+      </div>
+
+      <div>
+        <label>Statut</label>
+
+        <select id="eActive">
+
+          <option
+            value="1"
+            ${user.active ? 'selected' : ''}
+          >
+            Actif
+          </option>
+
+          <option
+            value="0"
+            ${!user.active ? 'selected' : ''}
+          >
+            Désactivé
+          </option>
+
+        </select>
+      </div>
+
+    </div>
+
+
+    <p
+      id="modalError"
+      class="error"
+    ></p>
+
+
+    <button
+      class="primary"
+      style="width:100%;margin-top:15px"
+      onclick="saveUser(${id})"
+    >
+      Enregistrer les modifications
+    </button>
+
+    `
+  );
+
+}
+
+
+async function saveUser(id){
+
+  try{
+
+    await api(
+
+      '/api/admin/users/'+id,
+
+      {
+
+        method:'PATCH',
+
+        body:JSON.stringify({
+
+          name:(
+            $('eFirstName').value.trim() +
+            ' ' +
+            $('eLastName').value.trim()
+          ).trim(),
+
+          email:$('eEmail').value,
+
+          first_name:$('eFirstName').value,
+          last_name:$('eLastName').value,
+          birth_date:$('eBirthDate').value,
+          birth_place:$('eBirthPlace').value,
+          nationality:$('eNationality').value,
+          gender:$('eGender').value,
+          marital_status:$('eMaritalStatus').value,
+
+          phone:$('ePhone').value,
+          address:$('eAddress').value,
+          city:$('eCity').value,
+          country:$('eCountry').value,
+
+          id_type:$('eIdType').value,
+          id_number:$('eIdNumber').value,
+          id_issue_date:$('eIdIssueDate').value,
+          id_expiry_date:$('eIdExpiryDate').value,
+          id_country:$('eIdCountry').value,
+
+          profession:$('eProfession').value,
+          employer:$('eEmployer').value,
+          business_sector:$('eBusinessSector').value,
+          monthly_income:$('eMonthlyIncome').value,
+          income_source:$('eIncomeSource').value,
+
+          account_type:$('eAccountType').value,
+          account_currency:$('eCurrency').value,
+
+          password:$('ePass').value,
+
+          active:Number(
+            $('eActive').value
+          )
+
+        })
+
+      }
+
+    );
+
+    closeModal();
+
+    await loadUsers();
+    await loadStats();
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    $('modalError').textContent =
+      'Impossible d’enregistrer les modifications.';
+
+  }
+
+}
+
+/* ========================= */
+/* ACTIVER / DÉSACTIVER */
+/* ========================= */
+
+async function toggleUser(id,active){
+
+  const message =
+    active
+      ? 'Activer ce compte ?'
+      : 'Désactiver ce compte ?';
+
+
+  if(!confirm(message)){
+    return;
+  }
+
+
+  try{
+
+    await api(
+
+      '/api/admin/users/'+id,
+
+      {
+
+        method:'PATCH',
+
+        body:JSON.stringify({
+          active:active
+        })
+
+      }
+
+    );
+
+
+    await loadUsers();
+
+    await loadStats();
+
+  }
+
+  catch(error){
+
+    alert(
+      'Opération impossible.'
+    );
+
+  }
+
+}
+
+
+
+/* ========================= */
+/* MODIFIER LE SOLDE */
+/* ========================= */
+
+async function balanceUser(id){
+
+  const users =
+    await api('/api/admin/users');
+
+
+  const user =
+    users.find(
+      u=>u.id===id
+    );
+
+
+  if(!user){
+    return;
+  }
+
+
+
+  openModal(
+
+    'Modifier le solde — '+user.account_no,
+
+    `
+
+    <p>
+
+      Solde actuel :
+
+      <b>
+        ${usd(user.balance_cents)}
+      </b>
+
+    </p>
+
+
+    <label>
+      Montant à ajouter ou retirer (USD)
+    </label>
+
+
+    <input
+      id="bAmount"
+      type="number"
+      step="0.01"
+      placeholder="Exemple : 1000 ou -100"
+      style="width:100%;margin-top:5px"
+    >
+
+
+    <br><br>
+
+
+    <label>
+      Libellé
+    </label>
+
+
+   <input
+  id="bLabel"
+  value="Ajustement administrateur"
+  style="width:100%;margin-top:5px"
+>
+
+<p class="small muted">
+
+  Utilisez un montant 
+  pour retirer des fonds.
+
+  Le solde ne peut pas devenir négatif.
+
+</p>
+
+    <p
+      id="modalError"
+      class="error"
+    ></p>
+
+
+    <button
+      class="primary"
+      onclick="saveBalance(${id})"
+    >
+      Enregistrer le solde
+    </button>
+
+    `
+  );
+
+}
+
+
+
+async function saveBalance(id){
+
+  try{
+
+    await api(
+
+      '/api/admin/users/'+id+'/balance',
+
+      {
+
+        method:'POST',
+
+        body:JSON.stringify({
+
+          amount:$('bAmount').value,
+
+          label:$('bLabel').value
+
+        })
+
+      }
+
+    );
+
+
+    closeModal();
+
+
+    await loadUsers();
+
+    await loadStats();
+
+  }
+
+  catch(error){
+
+    $('modalError').textContent =
+
+      error.error === 'NEGATIVE_BALANCE'
+
+      ?
+
+      'Le solde ne peut pas devenir négatif.'
+
+      :
+
+      'Montant invalide.';
+
+  }
+
+}
+
+
+
+/* ========================= */
+/* TRANSACTIONS */
+/* ========================= */
+
+async function transactions(id){
+
+  const users =
+    await api('/api/admin/users');
+
+
+  const user =
+    users.find(
+      u=>u.id===id
+    );
+
+
+  const tx =
+    await api(
+      '/api/admin/users/'+id+'/transactions'
+    );
+
+
+
+  openModal(
+
+    'Opérations — '+(
+      user
+        ? user.account_no
+        : 'Compte'
+    ),
+
+    `
+
+    <p>
+
+      <b>
+        ${user ? esc(user.name) : ''}
+      </b>
+
+      —
+
+      solde
+
+      ${user
+        ? usd(user.balance_cents)
+        : ''}
+
+    </p>
+
+
+    <div style="overflow:auto">
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Opération
+            </th>
+
+            <th>
+              Date
+            </th>
+
+            <th>
+              Montant
+            </th>
+
+            <th>
+              Solde après
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody>
+
+          ${
+            tx.map(x=>`
+
+              <tr>
+
+                <td>
+                  ${esc(x.label)}
+                </td>
+
+                <td>
+                  ${new Date(
+                    x.created_at
+                  ).toLocaleString('fr-FR')}
+                </td>
+
+                <td>
+                  ${usd(x.amount_cents)}
+                </td>
+
+                <td>
+                  ${usd(x.balance_after_cents)}
+                </td>
+
+              </tr>
+
+            `).join('')
+
+            ||
+
+            `<tr>
+              <td colspan="4">
+                Aucune opération.
+              </td>
+            </tr>`
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    `
+  );
+
+}
+
+
+
+/* ========================= */
+/* LANCEMENT */
+/* ========================= */
+
+check();
+
+</script>
+
+</body>
+</html>

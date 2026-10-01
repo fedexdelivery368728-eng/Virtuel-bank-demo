@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Banque Islamique de Développement</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter,Arial;
+  background:#f3f7f5;
+  color:#17332d
+}
+
+header{
+  height:68px;
+  background:#073d34;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6%
+}
+
+.logo{
+  font-weight:800;
+  font-size:21px
+}
+
+select,input,button{
+  font:inherit;
+  padding:11px;
+  border-radius:9px;
+  border:1px solid #d5dfdb
+}
+
+button{
+  cursor:pointer
+}
+
+.primary{
+  background:#087f68;
+  color:#fff;
+  border:0;
+  font-weight:700
+}
+
+.wrap{
+  max-width:1100px;
+  margin:28px auto;
+  padding:0 18px
+}
+
+.auth{
+  max-width:520px;
+  margin:50px auto;
+  background:#fff;
+  padding:35px 32px;
+  border-radius:17px;
+  box-shadow:0 8px 30px #0001
+}
+
+.auth input,.form input{
+  width:100%;
+  margin:6px 0 12px
+}
+
+.switch{
+  color:#087f68;
+  cursor:pointer
+}
+
+.app{
+  display:none
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin:20px 0
+}
+
+.card{
+  background:#fff;
+  padding:21px;
+  border-radius:15px;
+  box-shadow:0 5px 22px #0000000b;
+  margin:15px 0
+}
+
+.big{
+  font-size:30px;
+  font-weight:800;
+  margin-top:7px
+}
+
+.muted{
+  color:#6b7c76
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
+
+.tabs button{
+  border:0;
+  background:#e7f0ed
+}
+
+.tabs .active{
+  background:#087f68;
+  color:#fff
+}
+
+.view{
+  display:none
+}
+
+.view.active{
+  display:block
+}
+
+table{
+  width:100%;
+  border-collapse:collapse
+}
+
+td,th{
+  text-align:start;
+  padding:12px;
+  border-bottom:1px solid #e7ecea
+}
+
+.green{
+  color:#087f68
+}
+
+.red{
+  color:#a33f3f
+}
+
+.notice{
+  background:#edf7f3;
+  padding:12px;
+  border-radius:9px;
+  margin:12px 0
+}
+
+.danger{
+  color:#a33f3f
+}
+
+/* PAGE DE CONNEXION */
+
+.login-title{
+  text-align:center;
+  margin-bottom:38px
+}
+
+.login-title img{
+  width:150px;
+  max-width:60%;
+  height:auto;
+  display:block;
+  margin:0 auto 22px
+}
+
+.login-title h1{
+  margin:0;
+  font-size:30px;
+  line-height:1.25;
+  color:#17332d
+}
+
+.login-label{
+  font-size:18px;
+  color:#17332d;
+  margin:0 0 6px
+}
+
+.login-input{
+  width:100%;
+  border:0;
+  border-bottom:2px solid #d5dfdb;
+  border-radius:0;
+  padding:12px 0;
+  margin:0 0 28px;
+  outline:none;
+  background:transparent
+}
+
+.login-input:focus{
+  border-bottom-color:#087f68
+}
+
+.login-input::placeholder{
+  color:#6b7c76
+}
+
+.remember-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:5px 0 30px;
+  color:#17332d;
+  font-size:17px
+}
+
+.toggle{
+  position:relative;
+  width:52px;
+  height:28px;
+  display:inline-block
+}
+
+.toggle input{
+  opacity:0;
+  width:0;
+  height:0
+}
+
+.toggle-slider{
+  position:absolute;
+  inset:0;
+  background:#d5dfdb;
+  border-radius:30px;
+  cursor:pointer;
+  transition:.2s
+}
+
+.toggle-slider:before{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:22px;
+  left:3px;
+  top:3px;
+  background:#fff;
+  border-radius:50%;
+  transition:.2s
+}
+
+.toggle input:checked + .toggle-slider{
+  background:#087f68
+}
+
+.toggle input:checked + .toggle-slider:before{
+  transform:translateX(24px)
+}
+
+.login-button{
+  width:100%;
+  padding:15px;
+  border-radius:30px;
+  font-size:19px
+}
+
+.forgot{
+  display:block;
+  text-align:center;
+  margin-top:25px;
+  color:#087f68;
+  font-size:17px;
+  font-weight:700;
+  text-decoration:underline
+}
+
+.create-account{
+  text-align:center;
+  margin-top:25px
+}
+
+@media(max-width:700px){
+
+  .grid{
+    grid-template-columns:1fr
+  }
+
+  .top{
+    align-items:flex-start;
+    flex-direction:column
+  }
+
+  .auth{
+    margin:25px auto;
+    padding:28px 22px
+  }
+
+  .login-title h1{
+    font-size:27px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    Banque Islamique de Développement
+  </div>
+
+  <select id="language" onchange="setLanguage(this.value)">
+    <option value="fr">Français</option>
+    <option value="en">English</option>
+    <option value="ar">العربية</option>
+  </select>
+
+</header>
+
+<div class="wrap">
+
+<section id="auth" class="auth">
+
+  <div class="login-title">
+
+    <img src="IMG_4145.jpeg" alt="Logo">
+
+    <h1>
+      Bienvenue dans votre espace de la banque islamique de déloppement
+    </h1>
+
+  </div>
+
+  <div id="loginBox">
+
+    <p class="login-label">
+      Saisissez votre identifiant
+    </p>
+
+    <input
+      id="lemail"
+      class="login-input"
+      type="email"
+      placeholder="Saisissez votre identifiant"
+    >
+
+    <p class="login-label">
+      Saisissez votre mot de passe
+    </p>
+
+    <input
+      id="lpass"
+      class="login-input"
+      type="password"
+      placeholder="Saisissez votre mot de passe"
+    >
+
+    <div class="remember-row">
+
+      <span>
+        Se souvenir de moi
+      </span>
+
+      <label class="toggle">
+
+        <input type="checkbox">
+
+        <span class="toggle-slider"></span>
+
+      </label>
+
+    </div>
+
+<button id="loginButton" type="button" class="primary login-button" onclick="login()">
+  Identifiez-vous
+</button>
+
+    <p id="authError" class="danger"></p>
+
+    <a
+      href="#"
+      class="forgot"
+      onclick="return false;"
+    >
+      Mot de passe oublié ?
+    </a>
+
+    <p class="create-account">
+
+      <span data-k="noAccount"></span>
+
+      <span
+        class="switch"
+        onclick="mode('register')"
+        data-k="register"
+      ></span>
+
+    </p>
+
+  </div>
+
+<div id="registerBox" style="display:none">
+
+  <h1 data-k="create"></h1>
+
+  <h3>Identité</h3>
+
+  <input
+    id="rfirstName"
+    placeholder="Prénom"
+  >
+
+  <input
+    id="rlastName"
+    placeholder="Nom"
+  >
+
+  <input
+    id="rbirthDate"
+    type="date"
+    placeholder="Date de naissance"
+  >
+
+  <input
+    id="rbirthPlace"
+    placeholder="Lieu de naissance"
+  >
+
+  <input
+    id="rnationality"
+    placeholder="Nationalité"
+  >
+
+  <select id="rgender">
+    <option value="">Sexe</option>
+    <option value="M">Homme</option>
+    <option value="F">Femme</option>
+  </select>
+
+  <select id="rmaritalStatus">
+    <option value="">Situation matrimoniale</option>
+    <option value="single">Célibataire</option>
+    <option value="married">Marié(e)</option>
+    <option value="divorced">Divorcé(e)</option>
+    <option value="widowed">Veuf / Veuve</option>
+  </select>
+
+  <h3>Coordonnées</h3>
+
+  <input
+    id="rphone"
+    type="tel"
+    placeholder="Téléphone"
+  >
+
+  <input
+    id="remail"
+    type="email"
+    placeholder="Adresse e-mail"
+  >
+
+  <input
+    id="raddress"
+    placeholder="Adresse"
+  >
+
+  <input
+    id="rcity"
+    placeholder="Ville"
+  >
+
+  <input
+    id="rcountry"
+    placeholder="Pays"
+  >
+
+  <h3>Pièce d'identité</h3>
+
+  <select id="ridType">
+    <option value="">Type de pièce</option>
+    <option value="passport">Passeport</option>
+    <option value="national_id">Carte nationale d'identité</option>
+    <option value="residence_permit">Titre de séjour</option>
+  </select>
+
+  <input
+    id="ridNumber"
+    placeholder="Numéro de pièce"
+  >
+
+  <input
+    id="ridIssueDate"
+    type="date"
+  >
+
+  <input
+    id="ridExpiryDate"
+    type="date"
+  >
+
+  <input
+    id="ridCountry"
+    placeholder="Pays de délivrance"
+  >
+
+  <h3>Informations professionnelles</h3>
+
+  <input
+    id="rprofession"
+    placeholder="Profession"
+  >
+
+  <input
+    id="remployer"
+    placeholder="Employeur"
+  >
+
+  <input
+    id="rbusinessSector"
+    placeholder="Secteur d'activité"
+  >
+
+  <input
+    id="rmonthlyIncome"
+    type="number"
+    min="0"
+    step="0.01"
+    placeholder="Revenu mensuel"
+  >
+
+  <input
+    id="rincomeSource"
+    placeholder="Source des revenus"
+  >
+
+  <h3>Compte</h3>
+
+  <select id="raccountType">
+    <option value="">Type de compte</option>
+    <option value="current">Compte courant</option>
+    <option value="savings">Compte épargne</option>
+  </select>
+
+  <select id="raccountCurrency">
+    <option value="USD">USD — Dollar américain</option>
+    <option value="EUR">EUR — Euro</option>
+    <option value="MAD">MAD — Dirham marocain</option>
+    <option value="AED">AED — Dirham des Émirats arabes unis</option>
+  </select>
+
+  <input
+    id="rpass"
+    type="password"
+    placeholder="Mot de passe (8 caractères minimum)"
+  >
+
+  <button
+    class="primary"
+    onclick="register()"
+    data-k="createBtn"
+  ></button>
+
+  <p>
+
+    <span data-k="already"></span>
+
+    <span
+      class="switch"
+      onclick="mode('login')"
+      data-k="signin"
+    ></span>
+
+  </p>
+
+  <p id="regError" class="danger"></p>
+
+</div>
+
+  <div
+  id="accountCreated"
+  class="auth"
+  style="display:none"
+>
+
+  <h1>Compte créé avec succès</h1>
+
+  <p class="notice">
+    Votre compte  a été créé.
+  </p>
+
+  <p>
+    <strong>Titulaire :</strong>
+    <span id="createdHolder"></span>
+  </p>
+
+  <p>
+    <strong>N° de compte :</strong>
+    <span id="createdAccount"></span>
+  </p>
+
+  <p>
+    <strong>Devise :</strong>
+    <span id="createdCurrency"></span>
+  </p>
+
+  <div class="card">
+
+    <h3>RIB </h3>
+
+    <p
+      id="createdRib"
+      style="font-weight:800;font-size:18px"
+    ></p>
+
+    <button
+      class="primary"
+      onclick="copyRib()"
+    >
+      Copier le RIB
+    </button>
+
+  </div>
+
+  <p class="muted">
+    Ces coordonnées sont reel.
+  </p>
+
+  <button
+    class="primary"
+    onclick="accountCreated.style.display='none';openApp()"
+  >
+    Accéder à mon espace
+  </button>
+
+</div>
+  </section>
+<section id="app" class="app">
+
+  <div class="top">
+
+    <div>
+      <h1 id="hello"></h1>
+      <p id="email" class="muted"></p>
+    </div>
+
+    <button
+      onclick="logout()"
+      data-k="logout"
+    ></button>
+
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="muted" data-k="balance"></span>
+      <div id="balance" class="big"></div>
+    </div>
+
+    <div class="card">
+      <span class="muted" data-k="account"></span>
+      <div
+        id="account"
+        class="big"
+        style="font-size:19px"
+      ></div>
+    </div>
+
+    <div class="card">
+      <span class="muted" data-k="status"></span>
+      <div class="big">
+        ● <span data-k="active"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tabs">
+
+    <button
+      class="active"
+      onclick="show('home',this)"
+      data-k="dashboard"
+    ></button>
+
+    <button
+      onclick="show('transfer',this)"
+      data-k="transfer"
+    ></button>
+
+    <button
+      onclick="show('beneficiaries',this)"
+      data-k="beneficiaries"
+    ></button>
+
+    <button
+      onclick="show('history',this)"
+      data-k="history"
+    ></button>
+
+  </div>
+
+  <section
+    id="home"
+    class="view active card"
+  >
+
+    <h2 data-k="welcome"></h2>
+
+    <p
+      class="notice"
+      data-k="Money"
+    ></p>
+
+  </section>
+
+  <section
+    id="transfer"
+    class="view card"
+  >
+
+    <h2 data-k="newTransfer"></h2>
+
+    <p
+      class="notice"
+      data-k="Transfer"
+    ></p>
+
+    <select id="beneficiary"></select>
+
+    <input
+      id="amount"
+      type="number"
+      min="1"
+      placeholder="500.00"
+      step="0.01"
+    >
+
+    <button
+      class="primary"
+      onclick="transfer()"
+      data-k="send"
+    ></button>
+
+  </section>
+
+  <section
+    id="beneficiaries"
+    class="view card"
+  >
+
+    <h2 data-k="beneficiaries"></h2>
+
+    <div class="form">
+
+      <input id="bname">
+
+      <input id="baccount">
+
+      <button
+        class="primary"
+        onclick="addBeneficiary()"
+        data-k="add"
+      ></button>
+
+    </div>
+
+    <table>
+      <tbody id="btable"></tbody>
+    </table>
+
+  </section>
+
+  <section
+    id="history"
+    class="view card"
+  >
+
+    <h2 data-k="history"></h2>
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th data-k="operation"></th>
+          <th data-k="date"></th>
+          <th data-k="amount"></th>
+          <th data-k="after"></th>
+        </tr>
+
+      </thead>
+
+      <tbody id="tx"></tbody>
+
+    </table>
+
+  </section>
+
+</section>
+
+</div>
+
+<script>
+
+let lang="fr",me;
+
+const T={
+
+fr:{
+login:"Connexion",
+Notice:"",
+signin:"Se connecter",
+noAccount:"Pas encore de compte ?",
+register:"Créer un compte",
+create:"Créer votre compte",
+createBtn:"Créer le compte",
+already:"Vous avez déjà un compte ?",
+logout:"Déconnexion",
+balance:"Solde (USD)",
+account:"Compte",
+status:"Statut",
+active:"Actif",
+dashboard:"Accueil",
+transfer:"Virement",
+beneficiaries:"Bénéficiaires",
+history:"Historique",
+welcome:"Bienvenue dans votre banque ",
+Money:"Votre solde est en  (USD).",
+quick:"Actions rapides",
+credit:"Ajouter $1,000 ",
+newTransfer:"Nouveau virement",
+fakeTransfer:"Les virements sont internes au système .",
+send:"Envoyer",
+add:"Ajouter le bénéficiaire",
+operation:"Opération",
+date:"Date",
+amount:"Montant",
+after:"Solde après",
+footer:""
+},
+
+en:{
+login:"Sign in",
+Notice:"",
+signin:"Sign in",
+noAccount:"No account yet?",
+register:"Create account",
+create:"Create your account",
+createBtn:"Create account",
+already:"Already have an account?",
+logout:"Log out",
+balance:"Balance (USD)",
+account:"Account",
+status:"Status",
+active:"Active",
+dashboard:"Home",
+transfer:"Transfer",
+beneficiaries:"Beneficiaries",
+history:"History",
+welcome:"Welcome to your bank",
+fakeMoney:"Your balance  (USD).",
+quick:"Quick actions",
+credit:"Add $1000",
+newTransfer:"New transfer",
+Transfer:"Transfers stay inside the system.",
+send:"Send",
+add:"Add beneficiary",
+operation:"Operation",
+date:"Date",
+amount:"Amount",
+after:"Balance after",
+footer:""
+},
+
+ar:{
+login:"تسجيل الدخول",
+Notice:"",
+signin:"دخول",
+noAccount:"ليس لديك حساب؟",
+register:"إنشاء حساب",
+create:"إنشاء حسابك",
+createBtn:"إنشاء الحساب",
+already:"لديك حساب بالفعل؟",
+logout:"تسجيل الخروج",
+balance:"الرصيد الافتراضي (دولار أمريكي)",
+account:"الحساب الافتراضي",
+status:"الحالة",
+active:"نشط",
+dashboard:"الرئيسية",
+transfer:"تحويل",
+beneficiaries:"المستفيدون",
+history:"السجل",
+welcome:"مرحباً بك في مصرفك الافتراضي",
+fakeMoney:"الرصيد تجريبي ويتم عرضه بالدولار الأمريكي (USD).",
+quick:"إجراءات سريعة",
+credit:"إضافة 1000 دولار افتراضي",
+newTransfer:"تحويل جديد",
+fakeTransfer:"التحويلات تبقى داخل نظام العرض التجريبي.",
+send:"إرسال",
+add:"إضافة مستفيد",
+operation:"العملية",
+date:"التاريخ",
+amount:"المبلغ",
+after:"الرصيد بعد العملية",
+footer:""
+}
+
+};
+
+const tr=k=>T[lang][k]||k;
+
+const money=(v,currency="USD")=>
+  new Intl.NumberFormat(
+    lang==="ar" ? "ar-AE" : "fr-FR",
+    {
+      style:"currency",
+      currency:currency
+    }
+  ).format(Number(v)/100);
+
+function setLanguage(l){
+  lang=l;
+  document.documentElement.dir=l==="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-k]").forEach(
+    e=>e.textContent=tr(e.dataset.k)
+  );
+}
+
+function mode(m){
+  loginBox.style.display=m==="login"?"block":"none";
+  registerBox.style.display=m==="register"?"block":"none";
+  authError.textContent="";
+  regError.textContent="";
+}
+
+async function api(url,opt={}){
+
+  const r = await fetch(url,{
+    credentials:"same-origin",
+    headers:{
+      "Content-Type":"application/json",
+      ...(opt.headers || {})
+    },
+    ...opt
+  });
+
+  const text = await r.text();
+
+  let d;
+
+  try{
+    d = text ? JSON.parse(text) : {};
+  }catch(e){
+    throw {
+      error:"SERVER_RESPONSE_NOT_JSON",
+      message:text || "Réponse invalide du serveur"
+    };
+  }
+
+  if(!r.ok){
+    throw d;
+  }
+
+  return d;
+}
+
+async function register(){
+
+  try{
+
+    const result = await api(
+      "/api/register",
+      {
+        method:"POST",
+
+        body:JSON.stringify({
+
+          firstName:rfirstName.value,
+          lastName:rlastName.value,
+
+          birthDate:rbirthDate.value,
+          birthPlace:rbirthPlace.value,
+          nationality:rnationality.value,
+          gender:rgender.value,
+          maritalStatus:rmaritalStatus.value,
+
+          phone:rphone.value,
+          email:remail.value,
+          address:raddress.value,
+          city:rcity.value,
+          country:rcountry.value,
+
+          idType:ridType.value,
+          idNumber:ridNumber.value,
+          idIssueDate:ridIssueDate.value,
+          idExpiryDate:ridExpiryDate.value,
+          idCountry:ridCountry.value,
+
+          profession:rprofession.value,
+          employer:remployer.value,
+          businessSector:rbusinessSector.value,
+          monthlyIncome:rmonthlyIncome.value,
+          incomeSource:rincomeSource.value,
+
+          accountType:raccountType.value,
+          accountCurrency:raccountCurrency.value,
+
+          password:rpass.value
+
+        })
+      }
+    );
+
+    auth.style.display="none";
+
+    createdHolder.textContent =
+      `${rfirstName.value} ${rlastName.value}`;
+
+    createdAccount.textContent =
+      result.account_no;
+
+    createdCurrency.textContent =
+      raccountCurrency.value;
+
+    createdRib.textContent =
+      "-" + result.account_no;
+
+    accountCreated.style.display="block";
+
+  }catch(e){
+
+    regError.textContent=
+      lang==="ar"
+      ?"تعذر إنشاء الحساب"
+      :lang==="en"
+      ?"Could not create account"
+      :"Impossible de créer le compte";
+
+  }
+
+}
+
+
+async function login(){
+
+  const emailValue =
+    document.getElementById("lemail").value.trim();
+
+  const passwordValue =
+    document.getElementById("lpass").value;
+
+  const errorBox =
+    document.getElementById("authError");
+
+  errorBox.textContent="";
+
+  if(!emailValue || !passwordValue){
+
+    errorBox.textContent =
+      "Veuillez saisir votre identifiant et votre mot de passe.";
+
+    return;
+  }
+
+  try{
+
+    const result = await api(
+      "/api/login",
+      {
+        method:"POST",
+
+        body:JSON.stringify({
+          email:emailValue,
+          password:passwordValue
+        })
+      }
+    );
+
+    console.log("LOGIN OK:",result);
+
+    await openApp();
+
+  }catch(e){
+
+    console.error("ERREUR LOGIN:",e);
+
+    errorBox.textContent =
+      e?.error ||
+      e?.message ||
+      "Erreur de connexion au serveur.";
+
+  }
+}
+window.login = login;
+    
+async function openApp(){
+
+  const authBox =
+    document.getElementById("auth");
+
+  const appBox =
+    document.getElementById("app");
+
+  const errorBox =
+    document.getElementById("authError");
+
+  try{
+
+    console.log("OPEN APP : début");
+
+    await load();
+
+    console.log("OPEN APP : load terminé");
+
+    authBox.style.display = "none";
+    appBox.style.display = "block";
+
+    console.log("OPEN APP : espace client affiché");
+
+  }catch(e){
+
+    console.error("ERREUR OPEN APP :", e);
+
+    if(errorBox){
+
+      errorBox.textContent =
+        e?.error ||
+        e?.message ||
+        "Erreur lors du chargement du compte.";
+
+    }
+
+  }
+}
+async function load(){
+
+  me=await api("/api/me");
+
+  hello.textContent=
+    (
+      lang==="ar"
+      ?"مرحباً، "
+      :lang==="en"
+      ?"Hello, "
+      :"Bonjour, "
+    )+me.name;
+
+  email.textContent=me.email;
+
+  const accountCurrency =
+  me.account_currency || "USD";
+
+balance.textContent =
+  money(me.balance_cents,accountCurrency);
+
+account.textContent =
+  "VB-"+String(me.id).padStart(8,"0");
+
+  let bs=await api("/api/beneficiaries");
+
+  beneficiary.innerHTML=
+    bs.map(
+      b=>`<option value="${b.id}">
+        ${b.name} — ${b.account_no}
+      </option>`
+    ).join("");
+
+  btable.innerHTML=
+    bs.map(
+      b=>`<tr>
+        <td>${b.name}</td>
+        <td>${b.account_no}</td>
+      </tr>`
+    ).join("");
+
+  let tx=await api("/api/transactions");
+
+  document.getElementById("tx").innerHTML=
+    tx.map(
+      x=>`<tr>
+        <td>${x.label}</td>
+        <td>${new Date(x.created_at).toLocaleString()}</td>
+        <td class="${x.amount_cents>=0?"green":"red"}">
+          ${money(x.amount_cents,accountCurrency)}
+        </td>
+        ${money(x.balance_after_cents,accountCurrency)}
+      </tr>`
+    ).join("");
+
+  setLanguage(lang);
+
+}
+
+async function credit(){
+
+  await api(
+    "/api/credit",
+    {
+      method:"POST",
+      body:JSON.stringify({amount:1000})
+    }
+  );
+
+  await load();
+
+}
+
+async function transfer(){
+
+  try{
+
+    await api(
+      "/api/transfer",
+      {
+        method:"POST",
+        body:JSON.stringify({
+          beneficiaryId:beneficiary.value,
+          amount:amount.value
+        })
+      }
+    );
+
+    amount.value="";
+
+    await load();
+
+    show(
+      "history",
+      document.querySelectorAll(".tabs button")[3]
+    );
+
+  }catch(e){
+
+    alert(
+      lang==="ar"
+      ?"الرصيد غير كاف"
+      :lang==="en"
+      ?"Insufficient balance"
+      :"Solde insuffisant"
+    );
+
+  }
+
+}
+
+async function addBeneficiary(){
+
+  await api(
+    "/api/beneficiaries",
+    {
+      method:"POST",
+      body:JSON.stringify({
+        name:bname.value,
+        account_no:baccount.value
+      })
+    }
+  );
+
+  bname.value="";
+  baccount.value="";
+
+  await load();
+
+}
+
+async function logout(){
+
+  await api(
+    "/api/logout",
+    {
+      method:"POST"
+    }
+  );
+
+  location.reload();
+
+}
+async function copyRib(){
+
+  const rib = createdRib.textContent;
+
+  try{
+
+    await navigator.clipboard.writeText(rib);
+
+    alert(
+      lang==="ar"
+      ?"تم نسخ RIB التجريبي"
+      :lang==="en"
+      ?"RIB copied"
+      :"RIB de démonstration copié"
+    );
+
+  }catch(e){
+
+    alert(
+      lang==="ar"
+      ?"تعذر نسخ RIB"
+      :lang==="en"
+      ?"Unable to copy RIB"
+      :"Impossible de copier le RIB"
+    );
+
+  }
+
+}
+function show(id,b){
+
+  document
+    .querySelectorAll(".view")
+    .forEach(
+      v=>v.classList.remove("active")
+    );
+
+  document
+    .getElementById(id)
+    .classList.add("active");
+
+  document
+    .querySelectorAll(".tabs button")
+    .forEach(
+      x=>x.classList.remove("active")
+    );
+
+  b.classList.add("active");
+
+}
+setLanguage("fr");
+
+</script>
+
+</body>
+</html>
